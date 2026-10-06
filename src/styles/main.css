@@ -1,0 +1,43 @@
+:root {
+
+    /* Primary: Sky Blue (#0EA5E9) */
+    --color-primary: #0EA5E9;
+    --color-primary-hover: #0284c7;
+
+    /* Accent: Sunset Amber (#F59E0B) */
+    --color-accent: #F59E0B;
+    --color-accent-hover: #d97706;
+
+    /* Background: Very Light Gray (#F8FAFC) */
+    --color-background: #F8FAFC;
+
+    /* Surface: White (#FFFFFF) */
+    --color-surface: #FFFFFF;
+
+    /* Text: Dark Navy (#0F172A) */
+    --color-text-primary: #0F172A;
+    --color-text-secondary: #64748B;
+    /* Muted: Gray Blue */
+
+    /* Success: Green (#10B981) */
+    --color-success: #10B981;
+
+    /* Error: Red (#EF4444) */
+    --color-error: #EF4444;
+
+    /* Borders & Dividers */
+    --color-border: #E2E8F0;
+    --color-divider: #F1F5F9;
+
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+
+    color: var(--color-text-primary);
+    background-color: var(--color-background);
+
+}
