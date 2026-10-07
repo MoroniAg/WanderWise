@@ -1,0 +1,107 @@
+@media (max-width: 760px) {
+  .site-header {
+    height: 64px;
+    padding: 0 20px;
+  }
+
+  .main-nav {
+    gap: 18px;
+  }
+
+  .account-link {
+    margin-left: 12px;
+  }
+
+  .page-content {
+    width: min(100% - 40px, 560px);
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    min-height: 0;
+    padding: 34px 0 24px;
+  }
+
+  .hero-art {
+    min-height: 190px;
+  }
+
+  .search-fields {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .search-button {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-header {
+    padding: 0 16px;
+  }
+
+  .brand {
+    gap: 6px;
+    font-size: 0.9rem;
+  }
+
+  .brand-mark {
+    width: 29px;
+  }
+
+  .main-nav {
+    gap: 11px;
+  }
+
+  .main-nav a {
+    font-size: 0.72rem;
+  }
+
+  .account-link {
+    width: 28px;
+    margin-left: 6px;
+  }
+
+  .page-content {
+    width: calc(100% - 32px);
+  }
+
+  .hero {
+    padding-top: 28px;
+  }
+
+  h1 {
+    font-size: 1.85rem;
+  }
+
+  .hero-description {
+    font-size: 0.9rem;
+  }
+
+  .desktop-break {
+    display: none;
+  }
+
+  .hero-art {
+    min-height: 160px;
+  }
+
+  .search-panel {
+    margin-bottom: 36px;
+    padding: 16px;
+  }
+
+  .trip-options {
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .trip-option {
+    font-size: 0.78rem;
+  }
+
+  .search-fields {
+    grid-template-columns: 1fr;
+  }
+}
