@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Compare weather and currency information for two cities with WanderWise.">
+  <title>City Comparison | WanderWise</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&family=Poppins:wght@600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/styles/main.css">
+  <link rel="stylesheet" href="/styles/animations.css">
+  <link rel="stylesheet" href="/styles/responsive.css">
+  <script type="module" src="/js/main.js"></script>
+  <script type="module" src="/js/city-results.js"></script>
+</head>
+
+<body>
+  <div id="header-placeholder"></div>
+
+  <main id="city-results" class="page-content results-page">
+    <a class="back-link" href="/#city-search">New comparison</a>
+
+    <section class="results-intro" aria-labelledby="results-title">
+      <p class="eyebrow">Destination comparison</p>
+      <h1 id="results-title">City conditions</h1>
+      <p class="comparison-message" data-comparison-message role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="city-comparison" aria-label="Weather comparison">
+      <article class="city-result">
+        <p class="city-label">City one</p>
+        <h2 data-city-one>Waiting for city</h2>
+        <p class="city-weather-status" data-weather-one role="status" aria-live="polite">
+          <span class="weather-loading">Loading weather<span class="loading-dots" aria-hidden="true"><span>.</span><span>.</span><span>.</span></span></span>
+        </p>
+        <details class="weather-details" data-weather-details-one hidden>
+          <summary>Más detalles</summary>
+          <div class="weather-detail-groups" data-weather-content-one></div>
+        </details>
+      </article>
+      <article class="city-result">
+        <p class="city-label">City two</p>
+        <h2 data-city-two>Waiting for city</h2>
+        <p class="city-weather-status" data-weather-two role="status" aria-live="polite">
+          <span class="weather-loading">Loading weather<span class="loading-dots" aria-hidden="true"><span>.</span><span>.</span><span>.</span></span></span>
+        </p>
+        <details class="weather-details" data-weather-details-two hidden>
+          <summary>Más detalles</summary>
+          <div class="weather-detail-groups" data-weather-content-two></div>
+        </details>
+      </article>
+    </section>
+
+    <section class="exchange-section" aria-labelledby="exchange-title">
+      <p class="eyebrow">Currency</p>
+      <h2 id="exchange-title">Exchange information</h2>
+      <p data-exchange-status role="status" aria-live="polite">
+        Exchange information will appear here when a currency API is connected.
+      </p>
+    </section>
+  </main>
+
+</body>
+</html>

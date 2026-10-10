@@ -92,15 +92,6 @@
     padding: 16px;
   }
 
-  .trip-options {
-    justify-content: space-between;
-    gap: 12px;
-  }
-
-  .trip-option {
-    font-size: 0.78rem;
-  }
-
   .search-fields {
     grid-template-columns: 1fr;
   }
