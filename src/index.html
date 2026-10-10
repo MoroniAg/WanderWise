@@ -28,40 +28,20 @@
   <link rel="icon" type="image/svg+xml" href="/assets/icons/favicon.svg">
 
   <link rel="preload" href="/styles/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <script type="module" src="/js/main.js"></script>
 </head>
 
 <body>
-  <header class="site-header">
-    <a class="brand" href="/" aria-label="WanderWise home">
-      <svg class="brand-mark" viewBox="0 0 48 36" aria-hidden="true">
-        <path d="M2 31 15 12l7 10 7-17 17 26H2Z" />
-        <path d="m10 20 5 4 4-5m5 5 5-5 5 5m3 2 4-4 4 6" />
-      </svg>
-      <span>WanderWise</span>
-    </a>
-
-    <nav class="main-nav" aria-label="Main navigation">
-      <a href="#explore">Explore</a>
-      <a href="#flight-search">Flights</a>
-      <a href="#trip-type">Trips</a>
-    </nav>
-
-    <a class="account-link" href="#account" aria-label="Your account">
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <circle cx="12" cy="8" r="3.5" />
-        <path d="M5 21v-2a7 7 0 0 1 14 0v2Z" />
-      </svg>
-    </a>
-  </header>
+  <div id="header-placeholder"></div>
 
   <main id="explore" class="page-content">
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero-copy">
-        <p class="eyebrow">Find your next getaway</p>
-        <h1 id="hero-title">Your next adventure<br>is closer than you think</h1>
+        <p class="eyebrow">Compare your next stops</p>
+        <h1 id="hero-title">Explore two cities<br>before you go</h1>
         <p class="hero-description">
-          Find the best flights, plan your trip,<br class="desktop-break">
-          and explore the world with WanderWise.
+          Compare local weather and currency information<br class="desktop-break">
+          for the cities on your itinerary.
         </p>
       </div>
 
@@ -75,45 +55,7 @@
       </div>
     </section>
 
-    <section id="flight-search" class="search-panel" aria-label="Search for flights">
-      <form>
-        <fieldset id="trip-type" class="trip-options">
-          <legend class="visually-hidden">Trip type</legend>
-          <label class="trip-option">
-            <input type="radio" name="trip-type" value="round-trip" checked>
-            <span>Round trip</span>
-          </label>
-          <label class="trip-option">
-            <input type="radio" name="trip-type" value="one-way">
-            <span>One way</span>
-          </label>
-          <label class="trip-option">
-            <input type="radio" name="trip-type" value="multi-city">
-            <span>Multi-city</span>
-          </label>
-        </fieldset>
-
-        <div class="search-fields">
-          <label class="search-field">
-            <span class="field-label">From</span>
-            <input type="text" name="origin" placeholder="City or airport" autocomplete="off">
-          </label>
-          <label class="search-field">
-            <span class="field-label">To</span>
-            <input type="text" name="destination" placeholder="City or airport" autocomplete="off">
-          </label>
-          <label class="search-field">
-            <span class="field-label">Departure</span>
-            <input type="date" name="departure">
-          </label>
-          <label class="search-field">
-            <span class="field-label">Return</span>
-            <input type="date" name="return">
-          </label>
-          <button class="search-button" type="submit">Search flights</button>
-        </div>
-      </form>
-    </section>
+    <div id="city-search-placeholder"></div>
   </main>
 </body>
 </html>
