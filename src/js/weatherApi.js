@@ -1,4 +1,4 @@
-const WEATHERSTACK_URL = "http://api.weatherstack.com/current";
+const WEATHERSTACK_URL = "https://api.weatherstack.com/current";
 const WEATHERSTACK_ACCESS_KEY = import.meta.env.VITE_WEATHERSTACK_ACCESS_KEY;
 const WEATHERSTACK_REQUEST_INTERVAL_MS = 5000;
 
