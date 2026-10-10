@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Choose a second city to compare with your saved destinations.">
+  <title>Compare Cities | WanderWise</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&family=Poppins:wght@600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/styles/main.css">
+  <link rel="stylesheet" href="/styles/animations.css">
+  <link rel="stylesheet" href="/styles/responsive.css">
+  <script type="module" src="/js/main.js"></script>
+  <script type="module" src="/js/compare-cities.js"></script>
+</head>
+
+<body>
+  <div id="header-placeholder"></div>
+
+  <main class="page-content saved-cities-page">
+    <a class="back-link" href="/explore.html">Back to Explore</a>
+    <section class="results-intro" aria-labelledby="saved-cities-title">
+      <p class="eyebrow">Your shortlist</p>
+      <h1 id="saved-cities-title">Compare cities</h1>
+      <p class="saved-cities-intro">Choose a second city for any destination you have saved.</p>
+    </section>
+
+    <section id="saved-city-list" class="saved-city-list" aria-label="Saved cities" aria-live="polite"></section>
+  </main>
+</body>
+</html>
