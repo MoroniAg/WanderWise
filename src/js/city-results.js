@@ -1,4 +1,5 @@
 import { getCurrentWeather } from "./weatherApi.js";
+import { getCountryInfo } from "./countryApi.js";
 
 const resultsPage = document.querySelector("#city-results");
 
@@ -21,6 +22,27 @@ if (resultsPage) {
 				const message = error instanceof Error ? error.message : "An unexpected error occurred.";
 				return { error: `Weather for ${city} could not be loaded: ${message}` };
 			}
+		};
+
+		const getCountryInfoForCity = async (city) => {
+			try {
+				return await getCountryInfo(city);
+			} catch (error) {
+				const message = error instanceof Error ? error.message : "An unexpected error occurred.";
+				return { error: `Country information for ${city} could not be loaded: ${message}` };
+			}
+		};
+
+		const renderCountryInfo = (statusSelector, descriptionSelector, country) => {
+			const status = resultsPage.querySelector(statusSelector);
+			const description = resultsPage.querySelector(descriptionSelector);
+			if (country.error) {
+				status.textContent = country.error;
+				return;
+			}
+
+			status.textContent = `Currency code: ${country.currencyCode}`;
+			description.textContent = country.description;
 		};
 
 		const createDetailGroup = (title, entries, iconUrl, iconDescription) => {
@@ -121,15 +143,17 @@ if (resultsPage) {
 			resultsPage.querySelector(detailsSelector).hidden = false;
 		};
 
-		const getExchangeInformation = (firstCity, secondCity) =>
-			`Currency exchange information for ${firstCity} and ${secondCity} is unavailable until a currency API is connected.`;
-
 		getWeatherForCity(cities[0]).then((weather) => {
 			renderWeather("[data-weather-one]", "[data-weather-details-one]", "[data-weather-content-one]", weather);
 		});
 		getWeatherForCity(cities[1]).then((weather) => {
 			renderWeather("[data-weather-two]", "[data-weather-details-two]", "[data-weather-content-two]", weather);
 		});
-		resultsPage.querySelector("[data-exchange-status]").textContent = getExchangeInformation(cities[0], cities[1]);
+		getCountryInfoForCity(cities[0]).then((country) => {
+			renderCountryInfo("[data-country-one]", "[data-country-description-one]", country);
+		});
+		getCountryInfoForCity(cities[1]).then((country) => {
+			renderCountryInfo("[data-country-two]", "[data-country-description-two]", country);
+		});
 	}
 }

@@ -38,6 +38,10 @@
         <p class="city-weather-status" data-weather-one role="status" aria-live="polite">
           <span class="weather-loading">Loading weather<span class="loading-dots" aria-hidden="true"><span>.</span><span>.</span><span>.</span></span></span>
         </p>
+        <section class="country-info" aria-label="Country information">
+          <p data-country-one role="status" aria-live="polite">Loading country information...</p>
+          <p data-country-description-one></p>
+        </section>
         <details class="weather-details" data-weather-details-one hidden>
           <summary>Más detalles</summary>
           <div class="weather-detail-groups" data-weather-content-one></div>
@@ -49,6 +53,10 @@
         <p class="city-weather-status" data-weather-two role="status" aria-live="polite">
           <span class="weather-loading">Loading weather<span class="loading-dots" aria-hidden="true"><span>.</span><span>.</span><span>.</span></span></span>
         </p>
+        <section class="country-info" aria-label="Country information">
+          <p data-country-two role="status" aria-live="polite">Loading country information...</p>
+          <p data-country-description-two></p>
+        </section>
         <details class="weather-details" data-weather-details-two hidden>
           <summary>Más detalles</summary>
           <div class="weather-detail-groups" data-weather-content-two></div>
@@ -60,7 +68,7 @@
       <p class="eyebrow">Currency</p>
       <h2 id="exchange-title">Exchange information</h2>
       <p data-exchange-status role="status" aria-live="polite">
-        Exchange information will appear here when a currency API is connected.
+        Currency and country information will appear in each city card.
       </p>
     </section>
   </main>
