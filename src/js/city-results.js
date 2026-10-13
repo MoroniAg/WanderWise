@@ -1,5 +1,6 @@
 import { getCurrentWeather } from "./weatherApi.js";
 import { getCountryInfo } from "./countryApi.js";
+import { getCurrencyChanges, convertCurrency } from "./currencyApi.js";
 
 const resultsPage = document.querySelector("#city-results");
 
@@ -33,7 +34,18 @@ if (resultsPage) {
 			}
 		};
 
-		const renderCountryInfo = (statusSelector, descriptionSelector, country) => {
+		const getCurrencyTrends = async (currencyCodes) => {
+			try {
+				const validCodes = currencyCodes.filter(Boolean);
+				if (validCodes.length === 0) return [];
+				return await getCurrencyChanges(validCodes);
+			} catch (error) {
+				const message = error instanceof Error ? error.message : "An unexpected error occurred.";
+				return { error: `Currency trends could not be loaded: ${message}` };
+			}
+		};
+
+		const renderCountryInfo = (statusSelector, descriptionSelector, country, trends = []) => {
 			const status = resultsPage.querySelector(statusSelector);
 			const description = resultsPage.querySelector(descriptionSelector);
 			if (country.error) {
@@ -41,8 +53,34 @@ if (resultsPage) {
 				return;
 			}
 
-			status.textContent = `Currency code: ${country.currencyCode}`;
+			const currencyCode = country.currencyCode;
+			const trend = trends.find(t => t.target === currencyCode);
+			
+			let currencyText = `Currency code: ${currencyCode}`;
+			if (trend) {
+				const arrow = trend.changePct >= 0 ? "↑" : "↓";
+				const color = trend.changePct >= 0 ? "green" : "red";
+				currencyText += ` <span style="color: ${color}">${arrow} ${trend.changePct.toFixed(2)}%</span>`;
+			}
+
+			status.innerHTML = currencyText;
 			description.textContent = country.description;
+		};
+
+		const renderConversion = (selector, fromCode, toCode) => {
+			const container = resultsPage.querySelector(selector);
+			if (!container || !fromCode || !toCode) return;
+
+			if (fromCode === toCode) {
+				container.textContent = `Same currency: ${fromCode}`;
+				return;
+			}
+
+			convertCurrency(fromCode, toCode).then(rate => {
+				container.textContent = `1 ${fromCode} = ${rate.toFixed(4)} ${toCode}`;
+			}).catch(err => {
+				container.textContent = "Conversion unavailable";
+			});
 		};
 
 		const createDetailGroup = (title, entries, iconUrl, iconDescription) => {
@@ -149,11 +187,22 @@ if (resultsPage) {
 		getWeatherForCity(cities[1]).then((weather) => {
 			renderWeather("[data-weather-two]", "[data-weather-details-two]", "[data-weather-content-two]", weather);
 		});
-		getCountryInfoForCity(cities[0]).then((country) => {
-			renderCountryInfo("[data-country-one]", "[data-country-description-one]", country);
-		});
-		getCountryInfoForCity(cities[1]).then((country) => {
-			renderCountryInfo("[data-country-two]", "[data-country-description-two]", country);
+
+		Promise.all([
+			getCountryInfoForCity(cities[0]),
+			getCountryInfoForCity(cities[1])
+		]).then(async ([country1, country2]) => {
+			const currencyCodes = [country1.currencyCode, country2.currencyCode];
+			const trends = await getCurrencyTrends(currencyCodes);
+			
+			renderCountryInfo("[data-country-one]", "[data-country-description-one]", country1, trends);
+			renderCountryInfo("[data-country-two]", "[data-country-description-two]", country2, trends);
+
+			if (country1.currencyCode && country2.currencyCode) {
+				setTimeout(() => {
+					renderConversion("[data-currency-conversion]", country1.currencyCode, country2.currencyCode);
+				}, 5000);
+			}
 		});
 	}
 }
