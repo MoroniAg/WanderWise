@@ -1,16 +1,8 @@
-const COUNTRY_API_URL = 'https://api.restcountries.com/countries/v5';
-const COUNTRY_API_KEY = import.meta.env.VITE_COUNTRY_ACESS_KEY;
-
+const COUNTRY_API_URL = 'https://geocoding-api.open-meteo.com/v1/search';
 
 export async function getCountryInfo(city) {
     try {
-        const response = await fetch(`${COUNTRY_API_URL}?q=${encodeURIComponent(city)}&pretty=1`, {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${COUNTRY_API_KEY}`,
-                'Content-Type': 'application/json'
-            }
-        });
+        const response = await fetch(`${COUNTRY_API_URL}?name=${encodeURIComponent(city)}`);
 
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -18,20 +10,20 @@ export async function getCountryInfo(city) {
 
         const result = await response.json();
 
-        if (result.data && result.data.objects && result.data.objects.length > 0) {
-            const countryData = result.data.objects[0];
+        if (result.results && result.results.length > 0) {
+            const countryData = result.results[0];
+            const countryCode = countryData.country_code;
 
-            const currencyCode = countryData.currencies && countryData.currencies.length > 0
-                ? countryData.currencies[0].code
-                : 'N/A';
-
-            const description = countryData.descriptions && countryData.descriptions.long
-                ? countryData.descriptions.long
-                : 'No description available.';
+            const currencyResponse = await fetch('/currencies.json');
+            if (!currencyResponse.ok) {
+                throw new Error('Could not load local currency data');
+            }
+            const currencies = await currencyResponse.json();
+            const countryCurrency = currencies[countryCode] || { currency: 'N/A', name: 'Unknown Currency' };
 
             return {
-                currencyCode,
-                description
+                currencyCode: countryCurrency.currency,
+                description: `Country: ${countryData.country || 'Unknown'}`
             };
         } else {
             throw new Error('No country information found for the given city.');
