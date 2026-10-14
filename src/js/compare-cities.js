@@ -3,88 +3,89 @@ import { getSavedCities, removeSavedCity } from "./storage.js";
 const savedCityList = document.querySelector("#saved-city-list");
 
 if (savedCityList) {
-	function createSavedCityRow(city) {
-		const row = document.createElement("article");
-		row.className = "saved-city-row";
+  renderSavedCities();
+}
 
-		const cityName = document.createElement("h2");
-		cityName.className = "saved-city-name";
-		cityName.textContent = city;
+function createSavedCityRow(city) {
+  const row = document.createElement("article");
+  row.className = "saved-city-row";
 
-		const form = document.createElement("form");
-		form.className = "saved-city-form";
+  const cityName = document.createElement("h2");
+  cityName.className = "saved-city-name";
+  cityName.textContent = city;
 
-		const label = document.createElement("label");
-		label.className = "search-field";
+  const form = document.createElement("form");
+  form.className = "saved-city-form";
 
-		const labelText = document.createElement("span");
-		labelText.className = "field-label";
-		labelText.textContent = `Compare ${city} with`;
+  const label = document.createElement("label");
+  label.className = "search-field";
 
-		const input = document.createElement("input");
-		input.type = "text";
-		input.name = "secondCity";
-		input.placeholder = "Enter another city";
-		input.autocomplete = "off";
-		input.required = true;
-		input.setAttribute("aria-label", `Second city to compare with ${city}`);
-		input.addEventListener("input", () => input.setCustomValidity(""));
+  const labelText = document.createElement("span");
+  labelText.className = "field-label";
+  labelText.textContent = `Compare ${city} with`;
 
-		label.append(labelText, input);
+  const input = document.createElement("input");
+  input.type = "text";
+  input.name = "secondCity";
+  input.placeholder = "Enter another city";
+  input.autocomplete = "off";
+  input.required = true;
+  input.setAttribute("aria-label", `Second city to compare with ${city}`);
+  input.addEventListener("input", () => input.setCustomValidity(""));
 
-		const compareButton = document.createElement("button");
-		compareButton.className = "search-button";
-		compareButton.type = "submit";
-		compareButton.textContent = "Compare";
+  label.append(labelText, input);
 
-		form.addEventListener("submit", (event) => {
-			event.preventDefault();
-			const secondCity = input.value.trim();
-			if (secondCity.toLocaleLowerCase() === city.toLocaleLowerCase()) {
-				input.setCustomValidity("Choose a different city to compare.");
-				input.reportValidity();
-				return;
-			}
+  const compareButton = document.createElement("button");
+  compareButton.className = "search-button";
+  compareButton.type = "submit";
+  compareButton.textContent = "Compare";
 
-			const params = new URLSearchParams({ city1: city, city2: secondCity });
-			window.location.assign(`/city-results.html?${params.toString()}`);
-		});
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const secondCity = input.value.trim();
+    if (secondCity.toLocaleLowerCase() === city.toLocaleLowerCase()) {
+      input.setCustomValidity("Choose a different city to compare.");
+      input.reportValidity();
+      return;
+    }
 
-		form.append(label, compareButton);
+    const params = new URLSearchParams({ city1: city, city2: secondCity });
+    window.location.assign(`/city-results.html?${params.toString()}`);
+  });
 
-		const removeButton = document.createElement("button");
-		removeButton.className = "remove-saved-city";
-		removeButton.type = "button";
-		removeButton.textContent = "Remove";
-		removeButton.setAttribute("aria-label", `Remove ${city} from saved cities`);
-		removeButton.addEventListener("click", () => {
-			removeSavedCity(city);
-			renderSavedCities();
-		});
+  form.append(label, compareButton);
 
-		row.append(cityName, form, removeButton);
-		return row;
-	}
+  const removeButton = document.createElement("button");
+  removeButton.className = "remove-saved-city";
+  removeButton.type = "button";
+  removeButton.textContent = "Remove";
+  removeButton.setAttribute("aria-label", `Remove ${city} from saved cities`);
+  removeButton.addEventListener("click", () => {
+    removeSavedCity(city);
+    renderSavedCities();
+  });
 
-	function renderSavedCities() {
-		const cities = getSavedCities();
-		savedCityList.replaceChildren();
+  row.append(cityName, form, removeButton);
+  return row;
+}
 
-		if (!cities.length) {
-			const emptyState = document.createElement("div");
-			emptyState.className = "saved-cities-empty";
-			const message = document.createElement("p");
-			message.textContent = "No saved cities yet.";
-			const exploreLink = document.createElement("a");
-			exploreLink.href = "/explore.html";
-			exploreLink.textContent = "Explore destinations";
-			emptyState.append(message, exploreLink);
-			savedCityList.append(emptyState);
-			return;
-		}
+function renderSavedCities() {
+  if (!savedCityList) return;
+  const cities = getSavedCities();
+  savedCityList.replaceChildren();
 
-		cities.forEach((city) => savedCityList.append(createSavedCityRow(city)));
-	}
+  if (!cities.length) {
+    const emptyState = document.createElement("div");
+    emptyState.className = "saved-cities-empty";
+    const message = document.createElement("p");
+    message.textContent = "No saved cities yet.";
+    const exploreLink = document.createElement("a");
+    exploreLink.href = "/explore.html";
+    exploreLink.textContent = "Explore destinations";
+    emptyState.append(message, exploreLink);
+    savedCityList.append(emptyState);
+    return;
+  }
 
-	renderSavedCities();
+  cities.forEach((city) => savedCityList.append(createSavedCityRow(city)));
 }
