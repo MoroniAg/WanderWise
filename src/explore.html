@@ -7,6 +7,20 @@
   <meta name="description" content="Explore destinations around the world and compare two cities with WanderWise.">
   <title>Explore Destinations | WanderWise</title>
 
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://wanderwise.render.com/explore.html">
+  <meta property="og:title" content="Explore Destinations | WanderWise">
+  <meta property="og:description"
+    content="Discover handpicked destinations and start comparing local conditions for your next adventure.">
+  <meta property="og:image" content="/assets/icons/favicon.svg">
+
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://wanderwise.render.com/explore.html">
+  <meta property="twitter:title" content="Explore Destinations | WanderWise">
+  <meta property="twitter:description"
+    content="Discover handpicked destinations and start comparing local conditions for your next adventure.">
+  <meta property="twitter:image" content="/assets/icons/favicon.svg">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://images.unsplash.com">
@@ -41,42 +55,72 @@
         </div>
         <a class="saved-cities-link" href="/compare-cities.html">Compare cities</a>
         <div class="region-filters" role="group" aria-label="Filter destinations by region">
-          <button type="button" class="region-filter is-active" data-region-filter="all" aria-pressed="true">All</button>
+          <button type="button" class="region-filter is-active" data-region-filter="all"
+            aria-pressed="true">All</button>
           <button type="button" class="region-filter" data-region-filter="asia" aria-pressed="false">Asia</button>
           <button type="button" class="region-filter" data-region-filter="europe" aria-pressed="false">Europe</button>
           <button type="button" class="region-filter" data-region-filter="africa" aria-pressed="false">Africa</button>
-          <button type="button" class="region-filter" data-region-filter="americas" aria-pressed="false">Americas</button>
+          <button type="button" class="region-filter" data-region-filter="americas"
+            aria-pressed="false">Americas</button>
         </div>
       </div>
 
       <div class="destination-grid" id="destination-grid">
         <article class="destination-card" data-region="asia">
-          <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1000&q=85" alt="Tokyo skyline at dusk" loading="lazy">
-          <div class="destination-copy"><p>Asia · Japan</p><h3>Tokyo</h3><button type="button" class="destination-pick" data-city="Tokyo">Add to comparison</button></div>
+          <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1000&q=85"
+            alt="Tokyo skyline at dusk" loading="lazy">
+          <div class="destination-copy">
+            <p>Asia · Japan</p>
+            <h3>Tokyo</h3><button type="button" class="destination-pick" data-city="Tokyo">Add to comparison</button>
+          </div>
         </article>
         <article class="destination-card" data-region="asia">
-          <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1000&q=85" alt="Traditional street in Kyoto" loading="lazy">
-          <div class="destination-copy"><p>Asia · Japan</p><h3>Kyoto</h3><button type="button" class="destination-pick" data-city="Kyoto">Add to comparison</button></div>
+          <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1000&q=85"
+            alt="Traditional street in Kyoto" loading="lazy">
+          <div class="destination-copy">
+            <p>Asia · Japan</p>
+            <h3>Kyoto</h3><button type="button" class="destination-pick" data-city="Kyoto">Add to comparison</button>
+          </div>
         </article>
         <article class="destination-card" data-region="europe">
-          <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1000&q=85" alt="The Colosseum in Rome" loading="lazy">
-          <div class="destination-copy"><p>Europe · Italy</p><h3>Rome</h3><button type="button" class="destination-pick" data-city="Rome">Add to comparison</button></div>
+          <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1000&q=85"
+            alt="The Colosseum in Rome" loading="lazy">
+          <div class="destination-copy">
+            <p>Europe · Italy</p>
+            <h3>Rome</h3><button type="button" class="destination-pick" data-city="Rome">Add to comparison</button>
+          </div>
         </article>
         <article class="destination-card" data-region="europe">
-          <img src="https://images.unsplash.com/photo-1476610182048-b716b8518aae?auto=format&fit=crop&w=1000&q=85" alt="Waterfall in Iceland" loading="lazy">
-          <div class="destination-copy"><p>Europe · Iceland</p><h3>Reykjavik</h3><button type="button" class="destination-pick" data-city="Reykjavik">Add to comparison</button></div>
+          <img src="https://images.unsplash.com/photo-1476610182048-b716b8518aae?auto=format&fit=crop&w=1000&q=85"
+            alt="Waterfall in Iceland" loading="lazy">
+          <div class="destination-copy">
+            <p>Europe · Iceland</p>
+            <h3>Reykjavik</h3><button type="button" class="destination-pick" data-city="Reykjavik">Add to
+              comparison</button>
+          </div>
         </article>
         <article class="destination-card" data-region="africa">
-          <img src="https://images.unsplash.com/photo-1539020140153-e479b8c22e70?auto=format&fit=crop&w=1000&q=85" alt="Colorful market in Marrakech" loading="lazy">
-          <div class="destination-copy"><p>Africa · Morocco</p><h3>Marrakech</h3><button type="button" class="destination-pick" data-city="Marrakech">Add to comparison</button></div>
+          <img src="https://images.unsplash.com/photo-1539020140153-e479b8c22e70?auto=format&fit=crop&w=1000&q=85"
+            alt="Colorful market in Marrakech" loading="lazy">
+          <div class="destination-copy">
+            <p>Africa · Morocco</p>
+            <h3>Marrakech</h3><button type="button" class="destination-pick" data-city="Marrakech">Add to
+              comparison</button>
+          </div>
         </article>
         <article class="destination-card" data-region="americas">
-          <img src="https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&w=1000&q=85" alt="New York City skyline" loading="lazy">
-          <div class="destination-copy"><p>Americas · United States</p><h3>New York</h3><button type="button" class="destination-pick" data-city="New York">Add to comparison</button></div>
+          <img src="https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&w=1000&q=85"
+            alt="New York City skyline" loading="lazy">
+          <div class="destination-copy">
+            <p>Americas · United States</p>
+            <h3>New York</h3><button type="button" class="destination-pick" data-city="New York">Add to
+              comparison</button>
+          </div>
         </article>
       </div>
     </section>
   </main>
 
 </body>
+
 </html>
