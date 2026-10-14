@@ -41,3 +41,142 @@
 		animation: none;
 	}
 }
+
+.btn-animated {
+	transition: all 0.2s ease-in-out;
+	cursor: pointer;
+}
+
+.btn-animated:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-animated:active {
+	transform: translateY(0);
+}
+
+.btn-primary-animated {
+	background-color: var(--color-primary);
+	color: white;
+	border: none;
+	padding: 10px 20px;
+	border-radius: 8px;
+}
+
+.btn-primary-animated:hover {
+	background-color: var(--color-primary-hover);
+}
+
+.btn-accent-animated {
+	background-color: var(--color-accent);
+	color: white;
+	border: none;
+	padding: 10px 20px;
+	border-radius: 8px;
+}
+
+.btn-accent-animated:hover {
+	background-color: var(--color-accent-hover);
+}
+
+.floating-input {
+	position: relative;
+	/* margin-bottom: 20px; */
+	width: 100%;
+}
+
+.floating-input input {
+	width: 100%;
+	padding: 12px 16px;
+	font-size: 1rem;
+	border: 2px solid var(--color-border);
+	border-radius: 8px;
+	outline: none;
+	transition: border-color 0.2s ease-in-out;
+	background: transparent;
+}
+
+.floating-input input:focus {
+	border-color: var(--color-primary);
+}
+
+.floating-label {
+	position: absolute;
+	left: 12px;
+	top: 12px;
+	padding: 0 4px;
+	color: var(--color-text-secondary);
+	font-size: 1rem;
+	transition: all 0.2s ease-in-out;
+	pointer-events: none;
+	background-color: white;
+}
+
+.floating-input input:focus + .floating-label,
+.floating-input input:not(:placeholder-shown) + .floating-label {
+	top: -10px;
+	left: 10px;
+	font-size: 0.75rem;
+	color: var(--color-primary);
+	font-weight: 600;
+}
+
+.destination-card {
+	overflow: hidden; 
+}
+
+.destination-card img {
+	transition: transform 0.3s ease-in-out;
+}
+
+.destination-card:hover img {
+	transform: scale(1.08);
+}
+
+@keyframes color-pulse {
+	0% {
+		background-color: var(--color-primary);
+	}
+	50% {
+		background-color: var(--color-accent);
+	}
+	100% {
+		background-color: var(--color-primary);
+	}
+}
+
+.destination-pick {
+	transition: all 0.3s ease-in-out;
+	cursor: pointer;
+	background-color: var(--color-primary); /* Base color defined here */
+	color: white;
+	border: none;
+	padding: 10px 20px;
+	border-radius: 8px;
+}
+
+.destination-pick:hover {
+	animation: color-pulse 1.5s infinite ease-in-out;
+	color: white;
+}
+
+.saved-city-row {
+	transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+	cursor: pointer;
+}
+
+.saved-city-row:hover {
+	transform: scale(1.03);
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.city-result {
+	transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+	cursor: pointer;
+}
+
+.city-result:hover {
+	transform: scale(1.03);
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}

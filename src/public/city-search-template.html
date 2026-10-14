@@ -1,14 +1,14 @@
 <section id="city-search" class="search-panel" aria-label="Compare two cities">
   <form action="/city-results.html" method="get">
     <div class="search-fields">
-      <label class="search-field">
-        <span class="field-label">First city</span>
-        <input type="text" name="city1" placeholder="e.g. Tokyo" autocomplete="off" required>
-      </label>
-      <label class="search-field">
-        <span class="field-label">Second city</span>
-        <input type="text" name="city2" placeholder="e.g. Kyoto" autocomplete="off" required>
-      </label>
+      <div class="floating-input">
+        <input type="text" name="city1" id="city1" placeholder=" " autocomplete="off" required>
+        <label for="city1" class="floating-label">First city</label>
+      </div>
+      <div class="floating-input">
+        <input type="text" name="city2" id="city2" placeholder=" " autocomplete="off" required>
+        <label for="city2" class="floating-label">Second city</label>
+      </div>
       <button class="search-button" type="submit">Compare cities</button>
     </div>
   </form>

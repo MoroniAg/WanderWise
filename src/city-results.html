@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="/styles/main.css">
   <link rel="stylesheet" href="/styles/animations.css">
   <link rel="stylesheet" href="/styles/responsive.css">
+  <link rel="icon" type="image/svg+xml" href="/assets/icons/favicon.svg">
   <script type="module" src="/js/main.js"></script>
   <script type="module" src="/js/city-results.js"></script>
 </head>
@@ -43,7 +44,7 @@
           <p data-country-description-one></p>
         </section>
         <details class="weather-details" data-weather-details-one hidden>
-          <summary>Más detalles</summary>
+          <summary>More details</summary>
           <div class="weather-detail-groups" data-weather-content-one></div>
         </details>
       </article>
@@ -58,7 +59,7 @@
           <p data-country-description-two></p>
         </section>
         <details class="weather-details" data-weather-details-two hidden>
-          <summary>Más detalles</summary>
+          <summary>More details</summary>
           <div class="weather-detail-groups" data-weather-content-two></div>
         </details>
       </article>
@@ -66,8 +67,15 @@
 
     <section class="currency-conversion-section" aria-label="Currency Conversion">
       <h2>Currency Conversion</h2>
-      <p class="conversion-result" data-currency-conversion role="status" aria-live="polite">Loading conversion...</p>
+      <div class="currency-calculator">
+        <div class="calculator-input-group">
+          <input type="number" id="currency-amount" value="1" min="0" step="0.01" aria-label="Amount to convert">
+          <span class="amount-unit" data-from-currency="USD">$</span>
+        </div>
+        <p class="conversion-result" data-currency-conversion role="status" aria-live="polite">Loading conversion...</p>
+      </div>
     </section>
+
   </main>
 
 </body>

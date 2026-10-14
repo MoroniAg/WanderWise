@@ -55,7 +55,7 @@ if (resultsPage) {
 
 			const currencyCode = country.currencyCode;
 			const trend = trends.find(t => t.target === currencyCode);
-			
+
 			let currencyText = `Currency code: ${currencyCode}`;
 			if (trend) {
 				const arrow = trend.changePct >= 0 ? "↑" : "↓";
@@ -69,7 +69,13 @@ if (resultsPage) {
 
 		const renderConversion = (selector, fromCode, toCode) => {
 			const container = resultsPage.querySelector(selector);
+			const amountInput = resultsPage.querySelector("#currency-amount");
+			const unitDisplay = resultsPage.querySelector("[data-from-currency]");
+			const section = resultsPage.querySelector(".currency-conversion-section");
 			if (!container || !fromCode || !toCode) return;
+
+			if (unitDisplay) unitDisplay.textContent = fromCode;
+			if (section) section.style.display = "block";
 
 			if (fromCode === toCode) {
 				container.textContent = `Same currency: ${fromCode}`;
@@ -77,7 +83,18 @@ if (resultsPage) {
 			}
 
 			convertCurrency(fromCode, toCode).then(rate => {
-				container.textContent = `1 ${fromCode} = ${rate.toFixed(4)} ${toCode}`;
+				const updateResult = (amount) => {
+					const converted = amount * rate;
+					container.textContent = `1 ${fromCode} = ${rate.toFixed(4)} ${toCode} | ${amount} ${fromCode} = ${converted.toFixed(2)} ${toCode}`;
+				};
+
+				updateResult(amountInput ? parseFloat(amountInput.value) || 1 : 1);
+
+				if (amountInput) {
+					amountInput.addEventListener("input", () => {
+						updateResult(parseFloat(amountInput.value) || 0);
+					});
+				}
 			}).catch(err => {
 				container.textContent = "Conversion unavailable";
 			});
@@ -126,54 +143,67 @@ if (resultsPage) {
 			}
 
 			status.textContent = `${weather.city}: ${weather.temperature}°C, ${weather.description} (feels like ${weather.feelsLike}°C).`;
+
+			const card = status.closest(".city-result");
+			if (card) {
+				card.classList.remove("weather-cold", "weather-warm", "weather-hot");
+				if (weather.temperature <= 15) {
+					card.classList.add("weather-cold");
+				} else if (weather.temperature > 15 && weather.temperature <= 25) {
+					card.classList.add("weather-warm");
+				} else {
+					card.classList.add("weather-hot");
+				}
+			}
+
 			const { current, location } = weather.rawResponse;
 			const airQuality = current.air_quality || {};
 			const coordinates = location.lat && location.lon ? `${location.lat}, ${location.lon}` : null;
 			const detailGroups = [
-				createDetailGroup("Condiciones actuales", [
-					["Temperatura", displayValue(current.temperature, " °C")],
-					["Sensación térmica", displayValue(current.feelslike, " °C")],
-					["Descripción", current.weather_descriptions?.[0]],
-					["Momento del día", current.is_day === "yes" ? "Día" : current.is_day === "no" ? "Noche" : null],
-					["Hora de observación", current.observation_time],
-					["Código del clima", displayValue(current.weather_code)],
+				createDetailGroup("Current Conditions", [
+					["Temperature", displayValue(current.temperature, " °C")],
+					["Feels like", displayValue(current.feelslike, " °C")],
+					["Description", current.weather_descriptions?.[0]],
+					["Time of day", current.is_day === "yes" ? "Day" : current.is_day === "no" ? "Night" : null],
+					["Observation time", current.observation_time],
+					["Weather code", displayValue(current.weather_code)],
 				], current.weather_icons?.[0], current.weather_descriptions?.[0]),
-				createDetailGroup("Ubicación y hora", [
-					["País", location.country],
-					["Región", location.region],
-					["Coordenadas", coordinates],
-					["Zona horaria", location.timezone_id],
-					["Hora local", location.localtime],
-					["Diferencia UTC", displayValue(location.utc_offset)],
+				createDetailGroup("Location and Time", [
+					["Country", location.country],
+					["Region", location.region],
+					["Coordinates", coordinates],
+					["Time zone", location.timezone_id],
+					["Local time", location.localtime],
+					["UTC offset", displayValue(location.utc_offset)],
 				]),
-				createDetailGroup("Viento y atmósfera", [
-					["Viento", displayValue(current.wind_speed, " km/h")],
-					["Dirección del viento", current.wind_dir],
-					["Grados del viento", displayValue(current.wind_degree, "°")],
-					["Presión", displayValue(current.pressure, " mb")],
-					["Precipitación", displayValue(current.precip, " mm")],
-					["Humedad", displayValue(current.humidity, "%")],
-					["Nubosidad", displayValue(current.cloudcover, "%")],
-					["Visibilidad", displayValue(current.visibility, " km")],
-					["Índice UV", displayValue(current.uv_index)],
+				createDetailGroup("Wind and Atmosphere", [
+					["Wind", displayValue(current.wind_speed, " km/h")],
+					["Wind direction", current.wind_dir],
+					["Wind degrees", displayValue(current.wind_degree, "°")],
+					["Pressure", displayValue(current.pressure, " mb")],
+					["Precipitation", displayValue(current.precip, " mm")],
+					["Humidity", displayValue(current.humidity, "%")],
+					["Cloud cover", displayValue(current.cloudcover, "%")],
+					["Visibility", displayValue(current.visibility, " km")],
+					["UV Index", displayValue(current.uv_index)],
 				]),
-				createDetailGroup("Calidad del aire", [
-					["Monóxido de carbono (CO)", airQuality.co],
-					["Dióxido de nitrógeno (NO₂)", airQuality.no2],
-					["Ozono (O₃)", airQuality.o3],
-					["Dióxido de azufre (SO₂)", airQuality.so2],
-					["Partículas PM2.5", airQuality.pm2_5],
-					["Partículas PM10", airQuality.pm10],
-					["Índice EPA (EE. UU.)", airQuality["us-epa-index"]],
-					["Índice DEFRA (Reino Unido)", airQuality["gb-defra-index"]],
+				createDetailGroup("Air Quality", [
+					["Carbon monoxide (CO)", airQuality.co],
+					["Nitrogen dioxide (NO₂)", airQuality.no2],
+					["Ozone (O₃)", airQuality.o3],
+					["Sulfur dioxide (SO₂)", airQuality.so2],
+					["PM2.5 Particles", airQuality.pm2_5],
+					["PM10 Particles", airQuality.pm10],
+					["EPA Index (USA)", airQuality["us-epa-index"]],
+					["DEFRA Index (UK)", airQuality["gb-defra-index"]],
 				]),
-				createDetailGroup("Sol y luna", [
-					["Amanecer", current.astro?.sunrise],
-					["Atardecer", current.astro?.sunset],
-					["Salida de la luna", current.astro?.moonrise],
-					["Puesta de la luna", current.astro?.moonset],
-					["Fase lunar", current.astro?.moon_phase],
-					["Iluminación lunar", displayValue(current.astro?.moon_illumination, "%")],
+				createDetailGroup("Sun and Moon", [
+					["Sunrise", current.astro?.sunrise],
+					["Sunset", current.astro?.sunset],
+					["Moonrise", current.astro?.moonrise],
+					["Moonset", current.astro?.moonset],
+					["Moon phase", current.astro?.moon_phase],
+					["Moon illumination", displayValue(current.astro?.moon_illumination, "%")],
 				]),
 			];
 
@@ -194,7 +224,7 @@ if (resultsPage) {
 		]).then(async ([country1, country2]) => {
 			const currencyCodes = [country1.currencyCode, country2.currencyCode];
 			const trends = await getCurrencyTrends(currencyCodes);
-			
+
 			renderCountryInfo("[data-country-one]", "[data-country-description-one]", country1, trends);
 			renderCountryInfo("[data-country-two]", "[data-country-description-two]", country2, trends);
 

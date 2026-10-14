@@ -29,6 +29,18 @@
     --color-border: #E2E8F0;
     --color-divider: #F1F5F9;
 
+    --color-weather-cold-bg: #e0f2fe;
+    --color-weather-cold-border: #bae6fd;
+    --color-weather-cold-text: #0369a1;
+
+    --color-weather-warm-bg: #fef3c7;
+    --color-weather-warm-border: #fde68a;
+    --color-weather-warm-text: #92400e;
+
+    --color-weather-hot-bg: #fee2e2;
+    --color-weather-hot-border: #fecaca;
+    --color-weather-hot-text: #991b1b;
+
     --font-body: "Inter", system-ui, sans-serif;
     --font-heading: "Poppins", system-ui, sans-serif;
 }
@@ -157,6 +169,7 @@ input {
     border-radius: 16px;
     text-align: center;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    display: none; 
 }
 
 .currency-conversion-section h2 {
@@ -164,6 +177,41 @@ input {
     font-size: 1.5rem;
     margin-bottom: 16px;
     color: var(--color-text-primary);
+}
+
+.currency-calculator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.calculator-input-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--color-divider);
+    padding: 4px 12px;
+    border-radius: 50px;
+    border: 1px solid var(--color-border);
+}
+
+.calculator-input-group input {
+    width: 80px;
+    border: none;
+    background: transparent;
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    outline: none;
+}
+
+.amount-unit {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    color: var(--color-text-secondary);
 }
 
 .conversion-result {
@@ -200,6 +248,37 @@ h1 {
     place-items: center;
 }
 
+.city-result {
+    padding: 24px;
+    border-radius: 16px;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-surface);
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.city-result.weather-cold {
+    background-color: var(--color-weather-cold-bg);
+    border-color: var(--color-weather-cold-border);
+    color: var(--color-weather-cold-text);
+}
+
+.city-result.weather-warm {
+    background-color: var(--color-weather-warm-bg);
+    border-color: var(--color-weather-warm-border);
+    color: var(--color-weather-warm-text);
+}
+
+.city-result.weather-hot {
+    background-color: var(--color-weather-hot-bg);
+    border-color: var(--color-weather-hot-border);
+    color: var(--color-weather-hot-text);
+}
+
+.city-result .city-label,
+.city-result h2 {
+    color: inherit;
+}
+
 .hero-art svg {
     width: 100%;
     max-width: 340px;
@@ -231,9 +310,11 @@ h1 {
 }
 
 .search-fields {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+    display: flex;
+    /* grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto; */
     gap: 10px;
+    align-items: center;
+
 }
 
 .search-field {
@@ -387,7 +468,7 @@ a:focus-visible {
     margin: 0;
 }
 
-.weather-detail-group dl > div {
+.weather-detail-group dl>div {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
     align-items: baseline;
@@ -416,7 +497,7 @@ a:focus-visible {
     margin-bottom: 8px;
 }
 
-.exchange-section > p:last-child {
+.exchange-section>p:last-child {
     margin: 10px 0 0;
     color: var(--color-text-secondary);
     line-height: 1.5;
@@ -726,7 +807,7 @@ a:focus-visible {
 .back-link {
     display: inline-block;
     margin-bottom: 30px;
-    color: var(--color-primary-hover);
+    color: var(--color-success);
     font-size: 0.875rem;
     font-weight: 600;
 }
